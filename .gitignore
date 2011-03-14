@@ -5,3 +5,5 @@ install-sh
 missing
 src/Makefile
 src/t_string_utils
+src/tags
+string_utils-*.tar.gz
