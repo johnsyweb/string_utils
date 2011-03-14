@@ -1,0 +1,20 @@
+                               string_utils v0.1
+                               =================
+
+Written largely as an exercise, this package contains C++ implementations of
+most of the string methods available in Python. 
+
+See the following for an explanation of what these methods should do:
+
+          http://docs.python.org/library/stdtypes.html#string-methods
+
+A better explanation of what these methods actually do is the provided
+unit-test code.
+
+UnitTest++ is required to run the unit-tests (`make check`). You can get a copy
+here:
+
+                      http://unittest-cpp.sourceforge.net/
+
+To report bugs, please contact Pete Johns (see ./AUTHORS), preferably with a
+failing unit-test.

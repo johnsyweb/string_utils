@@ -1,0 +1,7 @@
+Makefile
+configure
+depcomp
+install-sh
+missing
+src/Makefile
+src/t_string_utils
