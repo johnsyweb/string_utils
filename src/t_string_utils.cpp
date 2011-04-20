@@ -704,6 +704,23 @@ TEST(SplitSeparatorAtEnd)
     CHECK_EQUAL("", returned.front()); returned.pop_front();
 }
 
+TEST(SplitOnlyASeparator)
+{
+    string_utils::string_list returned = string_utils::split("*", "*");
+    CHECK_EQUAL(2U, returned.size());
+    CHECK_EQUAL("", returned.front()); returned.pop_front();
+    CHECK_EQUAL("", returned.front()); returned.pop_front();
+}
+
+TEST(SplitNothingBetweenSeparators)
+{
+    string_utils::string_list returned = string_utils::split("four::dots", ":");
+    CHECK_EQUAL(3U, returned.size());
+    CHECK_EQUAL("four", returned.front()); returned.pop_front();
+    CHECK_EQUAL("", returned.front()); returned.pop_front();
+    CHECK_EQUAL("dots", returned.front()); returned.pop_front();
+}
+
 TEST(SplitLines)
 {
     string_utils::string_list returned = string_utils::splitlines("1. One\n2. Two\n3. Three\n");
