@@ -1,5 +1,5 @@
 AC_PREREQ([2.68])
-AC_INIT(string_utils, 0.1, paj-github@johnsy.com)
+AC_INIT(string_utils, 0.2, paj-github@johnsy.com)
 AM_INIT_AUTOMAKE(string_utils, 0.1)
 AC_CONFIG_SRCDIR([src/string_utils.h])
 AC_CONFIG_HEADERS([config.h])

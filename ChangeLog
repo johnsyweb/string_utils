@@ -1,1 +1,10 @@
 20110314    paj v0.1    Initial version
+
+20110420    paj v0.2    Bug fixes
+
+Ignore config.h
+Edge cases in rsplit(const std::string&, const std::string&, int)
+Edge cases with whitespace in lstrip(), split_helper()
+Two new unit tests. Passing.
+Edge case in split(const std::string&, const std::string&, int)
+Corrected variable names.
