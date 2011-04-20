@@ -390,7 +390,14 @@ string_list split(const std::string& s, const std::string& sep, int max_split = 
         last_pos = pos + sep_length;
         --max_split;
     }
-    split.push_back(std::string(s, last_pos));
+    if (0 == last_pos)
+    {
+        split.push_back("");
+    }
+    else
+    {
+        split.push_back(std::string(s, last_pos));
+    }
     return split;
 }
 

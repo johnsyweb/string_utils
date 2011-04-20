@@ -688,6 +688,22 @@ TEST(SplitThreeWordsOnceOnly)
     CHECK_EQUAL("Dog, Night", returned.front()); returned.pop_front();
 }
 
+TEST(SplitSeparatorAtStart)
+{
+    string_utils::string_list returned = string_utils::split("|pipe", "|");
+    CHECK_EQUAL(2U, returned.size());
+    CHECK_EQUAL("", returned.front()); returned.pop_front();
+    CHECK_EQUAL("pipe", returned.front()); returned.pop_front();
+}
+
+TEST(SplitSeparatorAtEnd)
+{
+    string_utils::string_list returned = string_utils::split("bang!", "!");
+    CHECK_EQUAL(2U, returned.size());
+    CHECK_EQUAL("bang", returned.front()); returned.pop_front();
+    CHECK_EQUAL("", returned.front()); returned.pop_front();
+}
+
 TEST(SplitLines)
 {
     string_utils::string_list returned = string_utils::splitlines("1. One\n2. Two\n3. Three\n");
