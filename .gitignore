@@ -4,7 +4,10 @@ configure
 depcomp
 install-sh
 missing
+src/*.gcda
+src/*.gcno
 src/Makefile
+src/coverage
 src/t_string_utils
 src/tags
 string_utils-0.?.tar.*
