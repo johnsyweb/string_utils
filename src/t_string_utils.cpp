@@ -408,6 +408,11 @@ TEST(LeftStripStringWithAnyCharacters)
     CHECK_EQUAL("hedge", string_utils::lstrip("xyxyxyhedge", "xy"));
 }
 
+TEST(LeftStripStringEmpty)
+{
+    CHECK_EQUAL("", string_utils::lstrip(""));
+}
+
 TEST(PartitionStringEmpty)
 {
     string_utils::partition_t partition = string_utils::partition("", ",");
@@ -646,6 +651,11 @@ TEST(RightStripStringWithNothingToDo)
     CHECK_EQUAL("tease", string_utils::rstrip("tease"));
 }
 
+TEST(RightStripStringEmpty)
+{
+    CHECK_EQUAL("", string_utils::rstrip(""));
+}
+
 TEST(SplitEmptyString)
 {
     string_utils::string_list returned = string_utils::split("", ",");
@@ -719,6 +729,19 @@ TEST(SplitNothingBetweenSeparators)
     CHECK_EQUAL("four", returned.front()); returned.pop_front();
     CHECK_EQUAL("", returned.front()); returned.pop_front();
     CHECK_EQUAL("dots", returned.front()); returned.pop_front();
+}
+
+TEST(SplitOnlyASpace)
+{
+    string_utils::string_list returned = string_utils::split(" ");
+    CHECK_EQUAL(0U, returned.size());
+}
+
+TEST(SplitOnlyAWordSurroundedBySpace)
+{
+    string_utils::string_list returned = string_utils::split("\tword    ");
+    CHECK_EQUAL(1U, returned.size());
+    CHECK_EQUAL("word", returned.front()); returned.pop_front();
 }
 
 TEST(SplitLines)

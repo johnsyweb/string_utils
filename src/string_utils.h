@@ -234,7 +234,22 @@ std::string lower(const std::string& s)
 std::string lstrip(const std::string& s, const char* chars = " \t\r\n")
 {
     std::string::size_type begin = s.find_first_not_of(chars);
+    if (begin == std::string::npos)
+    {
+        return "";
+    }
     return std::string(s, begin);
+}
+
+std::string rstrip(const std::string& s, const char* chars = " \t\r\n")
+{
+    std::string::size_type end = s.find_last_not_of(chars);
+    return std::string(s, 0, end + 1);
+}
+
+std::string strip(const std::string& s)
+{
+    return lstrip(rstrip(s));
 }
 
 struct partition_t
@@ -316,9 +331,10 @@ partition_t rpartition(const std::string& s, const std::string& sep)
 string_list split_helper(const std::string& s)
 {
     string_list split;
-    std::string::const_iterator end_of_space = s.begin();
-    std::string::const_iterator end_of_string = s.end();
-    std::string::const_iterator next_space = std::find_if(s.begin(), end_of_string, std::ptr_fun(::isspace));
+    const std::string stripped = strip(s);
+    std::string::const_iterator end_of_space = stripped.begin();
+    std::string::const_iterator end_of_string = stripped.end();
+    std::string::const_iterator next_space = std::find_if(stripped.begin(), end_of_string, std::ptr_fun(::isspace));
     for (;
          next_space != end_of_string;
          next_space = std::find_if(end_of_space, end_of_string, std::ptr_fun(::isspace)))
@@ -359,12 +375,6 @@ string_list rsplit(const std::string& s, const std::string& sep, int max_split =
 
     split.push_front(std::string(s, 0, last_pos));
     return split;
-}
-
-std::string rstrip(const std::string& s, const char* chars = " \t\r\n")
-{
-    std::string::size_type end = s.find_last_not_of(chars);
-    return std::string(s, 0, end + 1);
 }
 
 string_list split(const std::string& s)
@@ -431,11 +441,6 @@ bool startswith(const std::string& s, const std::string& prefix, int start = 0, 
 {
     return (end - start >= static_cast<int>(prefix.length()))
         && std::equal(prefix.begin(), prefix.end(), s.begin() + start);
-}
-
-std::string strip(const std::string& s)
-{
-    return lstrip(rstrip(s));
 }
 
 char swapcase_helper(char ch)
