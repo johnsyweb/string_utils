@@ -641,6 +641,39 @@ TEST(ReverseSplitThreeWordsOnceOnly)
     CHECK_EQUAL("Night", returned.front()); returned.pop_front();
 }
 
+TEST(ReverseSplitSeparatorAtEnd)
+{
+    string_utils::string_list returned = string_utils::rsplit("hash#", "#");
+    CHECK_EQUAL(2U, returned.size());
+    CHECK_EQUAL("hash", returned.front()); returned.pop_front();
+    CHECK_EQUAL("", returned.front()); returned.pop_front();
+}
+
+TEST(ReverseSplitSeparatorAtStart)
+{
+    string_utils::string_list returned = string_utils::rsplit(":colon", ":");
+    CHECK_EQUAL(2U, returned.size());
+    CHECK_EQUAL("", returned.front()); returned.pop_front();
+    CHECK_EQUAL("colon", returned.front()); returned.pop_front();
+}
+
+TEST(ReverseSplitOnlyASeparator)
+{
+    string_utils::string_list returned = string_utils::rsplit(".", ".");
+    CHECK_EQUAL(2U, returned.size());
+    CHECK_EQUAL("", returned.front()); returned.pop_front();
+    CHECK_EQUAL("", returned.front()); returned.pop_front();
+}
+
+TEST(ReverseSplitNothingBetweenSeparators)
+{
+    string_utils::string_list returned = string_utils::split("24//7", "/");
+    CHECK_EQUAL(3U, returned.size());
+    CHECK_EQUAL("24", returned.front()); returned.pop_front();
+    CHECK_EQUAL("", returned.front()); returned.pop_front();
+    CHECK_EQUAL("7", returned.front()); returned.pop_front();
+}
+
 TEST(RightStripString)
 {
     CHECK_EQUAL("tease", string_utils::rstrip("tease \t\r\n"));

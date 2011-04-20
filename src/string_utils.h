@@ -364,8 +364,9 @@ string_list rsplit(const std::string& s, const std::string& sep, int max_split =
     string_list split;
     const int sep_length = sep.length();
     int last_pos = s.length();
-    for (int pos = s.rfind(sep);
-         pos >= 0 && max_split > 0;
+    int pos = s.rfind(sep);
+    for (;
+         pos > 0 && max_split > 0;
          pos = s.rfind(sep, last_pos - 1))
     {
         split.push_front(std::string(s, pos + sep_length, last_pos - pos - sep_length));
@@ -373,7 +374,15 @@ string_list rsplit(const std::string& s, const std::string& sep, int max_split =
         --max_split;
     }
 
-    split.push_front(std::string(s, 0, last_pos));
+    if (0 == pos)
+    {
+        split.push_front(std::string(s, sep_length, last_pos));
+        split.push_front("");
+    }
+    else
+    {
+        split.push_front(std::string(s, 0, last_pos));
+    }
     return split;
 }
 
